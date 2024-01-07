@@ -4,6 +4,7 @@ import { randomUUID } from 'crypto';
 import { OrganizationRepository } from '../@types';
 
 export class InMemoryOrganizationRepository implements OrganizationRepository {
+
   private orgs: Organization[] = [];
 
   async create(data: Prisma.OrganizationCreateInput): Promise<Organization> {
@@ -31,5 +32,15 @@ export class InMemoryOrganizationRepository implements OrganizationRepository {
     }
 
     return org;
+  }
+
+  async findByEmail(email: string): Promise<Organization | null> {
+    const organization = this.orgs.find(org => org.email === email);
+
+    if (!organization) {
+      return null;
+    }
+
+    return organization;
   }
 }
