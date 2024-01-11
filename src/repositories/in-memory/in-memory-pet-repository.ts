@@ -6,7 +6,7 @@ import { PetRepository } from '../@types';
 export class InMemoryPetRepository implements PetRepository {
   private pets: Pet[] = [];
 
-  async create(data: Prisma.PetCreateInput, organization_id: string): Promise<Pet> {
+  async create(data: Prisma.PetUncheckedCreateInput): Promise<Pet> {
     const pet: Pet = {
       id: data.id ? data.id : randomUUID(),
       name: data.name,
@@ -16,7 +16,7 @@ export class InMemoryPetRepository implements PetRepository {
       description: data.description ? data.description : null,
       energy_level: data.energy_level,
       environment_type: data.environment_type,
-      organization_id: organization_id,
+      organization_id: data.organization_id,
       size: data.size,
       pictures: data.pictures ? data.pictures as string[] : [],
       requirements_for_adoption: data.requirements_for_adoption ? data.requirements_for_adoption as string[] : [],
