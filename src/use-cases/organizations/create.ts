@@ -1,7 +1,8 @@
+import { hash } from 'bcryptjs';
+
 import { OrganizationRepository } from '@/repositories/@types';
 import { CreateOrganizationParams, CreateOrganizationResponse } from './@types';
 import { EmailRegisteredError } from './errors';
-import { hash } from 'bcryptjs';
 
 export class CreateOrganizationUseCase {
   constructor(private organizationRepository: OrganizationRepository) { }
